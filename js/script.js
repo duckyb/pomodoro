@@ -24,30 +24,40 @@ function suona() {
       break;
     }
     case 1.5:{
+      console.log('case 1.5');
       timer = new Date(60000 * 25 + 1000);
       break;
     }
     case 2:{
+      console.log('case 2');
       timer = new Date(60000 * 5 + 1000);
       nodoCerchio2.classList.add('fill');
       break;
     }
     case 2.5:{
+      console.log('case 2.5');
       timer = new Date(60000 * 25 + 1000);
       break;
     }
     case 3:{
+      console.log('case 3');
       nodoCerchio3.classList.add('fill');
       timer = new Date(60000 * 30 + 1000);
       break;
     }
-    default:{
+    case default:{
+      console.log('case 3.5');
       timer = new Date(60000 * 25 + 1000);
+      contaPomodori = 0;
       nodoCerchio0.classList.remove('fill');
       nodoCerchio1.classList.remove('fill');
       nodoCerchio2.classList.remove('fill');
       nodoCerchio3.classList.remove('fill');
-      contaPomodori = 0;
+      aggiornaTimer();
+      alarm.play();
+      clearInterval(tick);
+      tick = false;
+      return;
     }
   }
   aggiornaTimer();
@@ -81,9 +91,12 @@ function aggiornaTimer() {
 
 function gestoreAvvia() {
   try {
+    console.log(tick);
     if (!tick) {
       tick = setInterval(aggiornaTimer, VELOCITA);
     }
+    alarm.pause();
+    alarm.currentTime = 0;
   } catch (e) {
     alert('gestoreAvvia ' + e);
   }
@@ -125,8 +138,7 @@ function gestoreLoad() {
     nodoCerchio3 = document.getElementById('cerchio3');
     nodoAvvia.onclick = gestoreAvvia;
     nodoPausa.onclick = gestorePausa;
-    // timer = new Date(60000 * 25 + 1000);
-    alarm = new Audio('calm_tune.mp3');
+    alarm = new Audio('audio/calm_tune.mp3');
     timer = new Date(25 * 60000 + 1000);
     contaPomodori = 0;
     aggiornaTimer(); // toglie subito un secondo
