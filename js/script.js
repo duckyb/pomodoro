@@ -45,7 +45,7 @@ function suona() {
       timer = new Date(60000 * 30 + 1000);
       break;
     }
-    case default:{
+    default:{
       console.log('case 3.5');
       timer = new Date(60000 * 25 + 1000);
       contaPomodori = 0;
